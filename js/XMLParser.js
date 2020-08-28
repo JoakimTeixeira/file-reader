@@ -1,17 +1,18 @@
 document.addEventListener('DOMContentLoaded', () => {
 	let file = '../resources/album.xml';
 
-	fetch(file)
-		.then(resp => {
-			return resp.text();
-		})
-		.then(data => {
-			let parser = new DOMParser();
-			let xmlDoc = parser.parseFromString(data, 'text/xml');
+	fetchXML = async file => {
+		const response = await fetch(file);
+		const data = await response.text();
 
-			document.getElementById('list-item').textContent = data;
-			buildAlbumList(xmlDoc);
-		});
+		let parser = new DOMParser();
+		let xmlDoc = parser.parseFromString(data, 'text/xml');
+
+		document.getElementById('list-item').textContent = data;
+		buildAlbumList(xmlDoc);
+	};
+
+	fetchXML(file);
 });
 
 const buildAlbumList = file => {
