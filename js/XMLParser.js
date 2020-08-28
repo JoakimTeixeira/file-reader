@@ -18,9 +18,9 @@ const buildAlbumList = file => {
 	let list = document.getElementById('list');
 	let artists = file.getElementsByTagName('artist');
 
-	Object.keys(artists).forEach(key => {
+	Array.from(artists).forEach(artist => {
 		let li = document.createElement('li');
-		li.textContent = artists[key].textContent;
+		li.textContent = artist.firstChild.nodeValue;
 		list.appendChild(li);
 	});
 };
